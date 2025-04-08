@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Sınavı</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #1e40af;
+            --background: #f8fafc;
+            --text: #1e293b;
+            --card-bg: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background-color: var(--background);
+            color: var(--text);
+            margin: 0;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .question-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            margin-bottom: 1.5rem;
+            transition: transform 0.2s ease;
+        }
+
+        .question-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .question-header {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--secondary);
+        }
+
+        .option-label {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-radius: 0.5rem;
+            background: #f8fafc;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .option-label:hover {
+            background: #f1f5f9;
+        }
+
+        input[type="radio"] {
+            margin-right: 1rem;
+            width: 1.25rem;
+            height: 1.25rem;
+            accent-color: var(--primary);
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            margin-top: 2rem;
+            padding: 1.25rem;
+            font-size: 1.1rem;
+        }
+
+        footer {
+            margin-top: 4rem;
+            text-align: center;
+            color: #64748b;
+            padding: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Python Sınavı 🚀</h1>
+        
+        <form method="POST" action="{{ url_for('submit_quiz') }}">
+            {% for question in questions %}
+            <div class="question-card">
+                <div class="question-header">Soru {{ loop.index }}</div>
+                <p class="question-text">{{ question.text }}</p>
+                
+                <label class="option-label">
+                    <input type="radio" name="q{{ question.id }}" value="a" required>
+                    {{ question.option_a }}
+                </label>
+                
+                <label class="option-label">
+                    <input type="radio" name="q{{ question.id }}" value="b" required>
+                    {{ question.option_b }}
+                </label>
+                
+                <label class="option-label">
+                    <input type="radio" name="q{{ question.id }}" value="c" required>
+                    {{ question.option_c }}
+                </label>
+                
+                <label class="option-label">
+                    <input type="radio" name="q{{ question.id }}" value="d" required>
+                    {{ question.option_d }}
+                </label>
+            </div>
+            {% endfor %}
+
+            <button type="submit">Cevapları Gönder ⚡</button>
+        </form>
+    </div>
+
+    <footer>
+        <p>© 2023 Python Sınavı. Tüm hakları saklıdır.<br>
+        Geliştiren: [Adınız] - [Unvanınız]</p>
+    </footer>
+</body>
+</html>
